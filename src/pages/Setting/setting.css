@@ -1,0 +1,9 @@
+/* setting.css */
+/* Minimal styling for setting page specific custom needs */
+.icon-bg-primary-light {
+    background-color: rgba(29, 78, 216, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
