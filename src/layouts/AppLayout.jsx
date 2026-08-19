@@ -158,10 +158,40 @@ const LayoutInner = () => {
   );
 };
 
-const AppLayout = () => (
-  <SidebarProvider>
-    <LayoutInner />
-  </SidebarProvider>
-);
+/* Tema admin (Bootstrap + Tabler icons) hanya dimuat di sini,
+   supaya halaman login tidak ikut menanggung bobot CSS admin. */
+const ADMIN_THEME_LINKS = [
+  { id: "app-style", href: "/assets/css/app.min.css?v=10" },
+  { id: "icons-style", href: "/assets/css/icons.min.css" },
+];
+
+const useAdminThemeStyles = () => {
+  React.useEffect(() => {
+    const links = ADMIN_THEME_LINKS.map(({ id, href }) => {
+      const existing = document.getElementById(id);
+      if (existing) return existing;
+      const link = document.createElement("link");
+      link.id = id;
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = href;
+      document.head.appendChild(link);
+      return link;
+    });
+
+    return () => {
+      links.forEach((link) => link.remove());
+    };
+  }, []);
+};
+
+const AppLayout = () => {
+  useAdminThemeStyles();
+  return (
+    <SidebarProvider>
+      <LayoutInner />
+    </SidebarProvider>
+  );
+};
 
 export default AppLayout;

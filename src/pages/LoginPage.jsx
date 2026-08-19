@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axiosClient from "../api/axiosClient";
 import { ToastContainer, toast } from "react-toastify";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./login.css";
 
@@ -11,7 +12,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showHero, setShowHero] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({ identifier: false, password: false });
@@ -39,7 +39,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     const trimmedIdentifier = identifier.trim();
     const trimmedPassword = password.trim();
@@ -95,7 +94,6 @@ const LoginPage = () => {
         err.response?.data?.error ||
         err.response?.data?.message ||
         "Login gagal. Periksa email dan password Anda.";
-      setError(message);
       toast.error(message);
     } finally {
       setLoading(false);
@@ -410,25 +408,6 @@ const LoginPage = () => {
                   <p className="text-secondary text-center small mb-4">
                     Masuk untuk melanjutkan ke sistem SIAP-AI
                   </p>
-
-                  {error && (
-                    <div className="alert alert-danger py-2 px-3 fs-12 mb-3 rounded-3 d-flex align-items-center gap-2">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="flex-shrink-0"
-                      >
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="8" x2="12" y2="12" />
-                        <line x1="12" y1="16" x2="12.01" y2="16" />
-                      </svg>
-                      <span>{error}</span>
-                    </div>
-                  )}
 
                   <form id="loginForm" onSubmit={handleSubmit} noValidate>
                     <div className="mb-3">

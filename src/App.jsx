@@ -1,32 +1,32 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFoundPage from "./pages/NotFoundPage";
-import LoginPage from "./pages/LoginPage";
-// import Dashboard from "./pages/HomePage";
-import Dashboard from "./pages/Dashboard";
-import ProjectPage from "./pages/Project";
-import ParticipantPage from "./pages/Participant";
-import ParticipantDetailPage from "./pages/Participant/detail";
-import DocumentPage from "./pages/Document";
-import OcrScreeningPage from "./pages/OcrScreening";
-import AiValidationPage from "./pages/AiValidation";
-import ValidationResultPage from "./pages/ValidationResult";
-import RecommendationPage from "./pages/Recommendation";
-import ProcessMonitoringPage from "./pages/ProcessMonitoring";
-import UserRolePage from "./pages/UserRole";
-import SettingPage from "./pages/Setting";
-import AnalyticsPage from "./pages/Report/Analytics";
-import ReportListPage from "./pages/Report/List";
-import TokenUsagePage from "./pages/TokenUsage";
-import ExportDataPage from "./pages/ExportData";
-import AturanValidasiPage from "./pages/AturanValidasi";
-import SkemaSertifikasiPage from "./pages/SkemaSertifikasi";
-import DummyPage from "./pages/DummyPage";
+
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const ProjectPage = lazy(() => import("./pages/Project"));
+const ParticipantPage = lazy(() => import("./pages/Participant"));
+const ParticipantDetailPage = lazy(() => import("./pages/Participant/detail"));
+const DocumentPage = lazy(() => import("./pages/Document"));
+const OcrScreeningPage = lazy(() => import("./pages/OcrScreening"));
+const AiValidationPage = lazy(() => import("./pages/AiValidation"));
+const ValidationResultPage = lazy(() => import("./pages/ValidationResult"));
+const RecommendationPage = lazy(() => import("./pages/Recommendation"));
+const ProcessMonitoringPage = lazy(() => import("./pages/ProcessMonitoring"));
+const UserRolePage = lazy(() => import("./pages/UserRole"));
+const SettingPage = lazy(() => import("./pages/Setting"));
+const AnalyticsPage = lazy(() => import("./pages/Report/Analytics"));
+const ReportListPage = lazy(() => import("./pages/Report/List"));
+const TokenUsagePage = lazy(() => import("./pages/TokenUsage"));
+const ExportDataPage = lazy(() => import("./pages/ExportData"));
+const AturanValidasiPage = lazy(() => import("./pages/AturanValidasi"));
+const SkemaSertifikasiPage = lazy(() => import("./pages/SkemaSertifikasi"));
 
 const App = () => {
   return (
+    <Suspense fallback={null}>
     <Routes>
       {/* Protected route + layout */}
       <Route
@@ -105,6 +105,7 @@ const App = () => {
       {/* Public route */}
       <Route path="/login" element={<LoginPage />} />
     </Routes>
+    </Suspense>
   );
 };
 
